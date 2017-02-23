@@ -1,5 +1,12 @@
-\documentclass{report}
+\documentclass{scrreprt}
 \usepackage[dutch]{babel}
+\usepackage[demo]{graphics}
+\usepackage{etoolbox}
+
+%Remove newpage from chapter
+\makeatletter
+\patchcmd{\scr@startchapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
 
 \title{SOP6 Release Plan}
 \author{Guus Hamm en Rick Rongen}
@@ -7,4 +14,25 @@
 
 \begin{document}
 	\maketitle
+	\tableofcontents
+	\newpage
+	\chapter{Verie Beheer Systeem}
+	Als versiebeheer systeem wordt er git gebruikt in combinatie met GitHub en GerritHub. Met git kan er gemakkelijk verschillende branches gemaakt worden waardoor code onafhankelijk van elkaar beheert kan worden.
+	GerritHub is een Gerrit applicatie die samen werkt met GitHub. Gerrit maakt van iedere commit een feature. Voordat deze commit in de origin branch komt te staan moet deze eerst gereviewd worden. 
+	
+	Door het gebruik van GitHub wordt er gebruik gemaakt van Open Source Software (OSS). Tevens bied GitHub de integratie met verschillende andere diensten en services zoals Continuous Integration of Code Review platforms.
+	\chapter{Branches}
+	\begin{figure}
+		\centering
+		\includegraphics{branches}
+		\caption{Branches}
+		\label{img:branches}
+	\end{figure}
+	Er worden enkele verschillende branches gemaakt, zodat het product gestroomlijnd ontwikkeld kan worden. Dit zijn de branches: Release, Test en, Development. Er is geen feature branch omdat dit door Gerrit geregeld wordt, iedere commit is een feature.
+	\chapter{Automatische Builds}
+	Alle branches die op GitHub staan worden automatisch gebouwd door Jenkins. Dit is een automatisch systeem dat projecten kan bouwen, testen en uitbrengen. Hierdoor wordt er gecontroleerd of de code die online staat werkend is en ‘geen’ fouten bevat.
+	\chapter{Tests}
+	Als het development team er zeker van is dat de code test waardig is, dan wordt deze op de test branch gezet. Hierna wordt dit door Jenkins gebouwd en kan het team deze versie testen. Als het testteam deze versie goed acht dan wordt deze versie doorgezet naar de Release branch en wordt er een nieuwe versie uitgebracht.
+	\chapter{Hot Fix}
+	%TODO
 \end{document}
