@@ -1,0 +1,26 @@
+\documentclass{scrreprt}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{float}
+
+%Remove newpage from chapter
+\makeatletter
+\patchcmd{\scr@startchapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\title{SOP6 Software Ontwikkel Straat}
+\author{Guus Hamm en Rick Rongen}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\chapter{Service}
+		\par Jenkins is de service die wij gebebruiken voor het automatisch bouwen, testen en artifacten van de code die wij op GitHub en GerritHub plaatsen. 
+		\par Doormiddel van plugins wordt Jenkins geinformeerd over nieuwe code, deze worden vervolgens automatisch gebouwd en getest. In het geval van GerritHub wordt de commit geverified of failed als de build en tests succeeden of failen.
+	\chapter{Packagen}
+		\par Als de build slaagt word er door middel van \texttt{'mvn package'} artifacts gemaakt. Dit is/zijn jar bestand(en) met de benodigde overige bestanden en bibliotheken om het project uit te kunnen voeren. Vervolgens kunnen deze doormiddel van een andere plugin gepubliceerd worden op bijvoorbeeld GitHub of gedeployd worden op een server.
+\end{document}
