@@ -1,0 +1,31 @@
+\documentclass{scrreprt}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{float}
+
+%Remove newpage from chapter
+\makeatletter
+\patchcmd{\scr@startchapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\title{Automatische Kwaliteits Controle}
+\author{Guus Hamm en Rick Rongen}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\chapter{Code Review}
+	Doordat al onze code door GerritHub gaat, wordt er al een code kwaliteits controle gedaan voordat deze op GitHub komt te staan. Iedere deelnemer van het project kan de code controleren en afkeuren als deze niet goed genoeg is.
+	\chapter{SonarQube}
+	SonarQube voert een statische code kwaliteits controle uit op de code die op GerritHub wordt gezet. Er wordt aan de hand van regels vastgesteld of de code goede structureel goed in elkaar zit en geen grote fouten bevat als oneindige loops etc.
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=.8\linewidth]{sonarqube}
+		\label{sonarqube}
+		\caption{SonarQube}
+	\end{figure}
+\end{document}
