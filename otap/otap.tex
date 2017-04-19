@@ -1,0 +1,42 @@
+\documentclass{scrreprt}
+\usepackage{hyperref}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{float}
+
+
+%Remove newpage from chapter
+\makeatletter
+\patchcmd{\scr@startchapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\title{SOP6 Otap}
+\author{Guus Hamm en Rick Rongen}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+
+	\chapter{OTAP}
+    Voor het ontwikkelen van een applicatie is het handig om een OTAP straat op te zetten. Binnen deze straat zijn er verschillende stappen. In dit document zullen wij defineren hoe onze OTAP ontwikkelstraat is opgezet.
+    
+    \chapter{Unit Tests}
+    Voordat de app naar de test/acceptatie omgeving gaat, wordt deze afgetest door unit tests. Deze tests zorgen ervoor dat de meeste functionaliteit afgetest is en de kans op fouten aanzienlijk kleiner is.
+    
+    \chapter{Docker}
+    \label{chap:docker}
+    Om ervoor te zorgen dat de transitie tussen de verschillende omgevingen soepel gaat maakt ons project gebruik van docker en docker-compose.
+    Door gebruik te maken van deze tooling wordt het mogelijk om de complete applicatie te deployen in een nieuwe omgeving door middel van het uitvoeren van een enkel commando. De docker omgeving zorgt ook voor consitentie tussen de verschillende omgevingen. Zodra een nieuwe versie beschikbaar is dan zal deze op alle omgevingen direct te gebruiken zijn.
+
+	\chapter{Test en Acceptatie omgeving}
+    De T(test) en A(acceptatie) omgevingen lijken in onze opstelling erg veel op elkaar. Beide omgevingen worden gedeployed door de applicatie te draaien in een docker container. Binnen beide omgevingen wordt tevens gebruik gemaakt van een enkele server. Deze server draait meerdere docker containers. Ieder van deze docker containers heeft een eigen verantwoordelijkheid. Het doel van de beide omgevingen is om veranderingen te kunnen testen op een omgeving die meer lijkt op de productie zonder dat het de productie omgeving is. 
+    
+    \chapter{Productie omgeving}
+    De productie omgeving bestaat uit een Wildfly(JBoss) server en andere servers voor databases en andere services. Als de applicatie succesvol uit de Test en Acceptatie omgeving komt, dan kan de applicatie worden deployd op deze omgeving. Dit is een handmatig proces, zodat dit kan gebeuren op een moment dat het geen problemen kan veroorzaken en het zo nodig gemakkelijk teruggedraaid kan worden. Tevens is dit de omgeving waarop de gebruik zich bevind. Het is dus van belang dat deze blijft werken. Iets waar het OTAP proces (hopelijk) voor zorgt.
+	
+\end{document}
+
